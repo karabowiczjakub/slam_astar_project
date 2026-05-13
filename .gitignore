@@ -1,0 +1,27 @@
+# ROS / colcon
+build/
+install/
+log/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Gazebo / logs
+*.log
+.gz/
+
+# RViz autosaves / backups
+*.rviz~
+*~
+
+# Large temporary files
+*.bag
+*.db3
+*.mcap
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
