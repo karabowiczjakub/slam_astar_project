@@ -22,7 +22,10 @@ class OdomTFPublisher(Node):
     def odom_callback(self, msg):
         t = TransformStamped()
 
+        # Używamy czasu z wiadomości odometrii,
+        # żeby TF był zsynchronizowany z Gazebo/clock.
         t.header.stamp = msg.header.stamp
+
         t.header.frame_id = 'jetbot/odom'
         t.child_frame_id = 'jetbot/chassis'
 

@@ -59,7 +59,7 @@
                     <geometry>
                         <plane>
                             <normal>0 0 1</normal>
-                            <size>30 22</size>
+                            <size>36 28</size>
                         </plane>
                     </geometry>
                     <material>
@@ -71,132 +71,139 @@
             </link>
         </model>
 
-        <!-- ===================== -->
+               <!-- ===================== -->
         <!-- DUZY SWIAT DO SLAM/A* -->
-        <!-- rozmiar ok. 25 m x 18 m -->
-        <!-- sciany wysokosc 2 m -->
+        <!-- Zamkniety pokoj 30 m x 22 m -->
+        <!-- Sciany zewnetrzne bez przerw -->
         <!-- ===================== -->
 
-        <!-- Gorna sciana -->
+        <!-- Gorna sciana zewnetrzna -->
         <model name="wall_north">
             <static>true</static>
-            <pose>0 9 1.0 0 0 0</pose>
+            <pose>0 11 1.0 0 0 0</pose>
             <link name="link">
                 <collision name="collision">
                     <geometry>
                         <box>
-                            <size>25 0.15 2.0</size>
+                            <size>30.8 0.4 2.0</size>
                         </box>
                     </geometry>
                 </collision>
                 <visual name="visual">
                     <geometry>
                         <box>
-                            <size>25 0.15 2.0</size>
+                            <size>30.8 0.4 2.0</size>
                         </box>
                     </geometry>
                     <material>
-                        <ambient>0.5 0.5 0.5 1</ambient>
-                        <diffuse>0.5 0.5 0.5 1</diffuse>
+                        <ambient>0.45 0.45 0.45 1</ambient>
+                        <diffuse>0.45 0.45 0.45 1</diffuse>
                     </material>
                 </visual>
             </link>
         </model>
 
-        <!-- Dolna sciana -->
+        <!-- Dolna sciana zewnetrzna -->
         <model name="wall_south">
             <static>true</static>
-            <pose>0 -9 1.0 0 0 0</pose>
+            <pose>0 -11 1.0 0 0 0</pose>
             <link name="link">
                 <collision name="collision">
                     <geometry>
                         <box>
-                            <size>25 0.15 2.0</size>
+                            <size>30.8 0.4 2.0</size>
                         </box>
                     </geometry>
                 </collision>
                 <visual name="visual">
                     <geometry>
                         <box>
-                            <size>25 0.15 2.0</size>
+                            <size>30.8 0.4 2.0</size>
                         </box>
                     </geometry>
                     <material>
-                        <ambient>0.5 0.5 0.5 1</ambient>
-                        <diffuse>0.5 0.5 0.5 1</diffuse>
+                        <ambient>0.45 0.45 0.45 1</ambient>
+                        <diffuse>0.45 0.45 0.45 1</diffuse>
                     </material>
                 </visual>
             </link>
         </model>
 
-        <!-- Prawa sciana -->
+        <!-- Prawa sciana zewnetrzna -->
         <model name="wall_east">
             <static>true</static>
-            <pose>12.5 0 1.0 0 0 0</pose>
+            <pose>15 0 1.0 0 0 0</pose>
             <link name="link">
                 <collision name="collision">
                     <geometry>
                         <box>
-                            <size>0.15 18 2.0</size>
+                            <size>0.4 22.8 2.0</size>
                         </box>
                     </geometry>
                 </collision>
                 <visual name="visual">
                     <geometry>
                         <box>
-                            <size>0.15 18 2.0</size>
+                            <size>0.4 22.8 2.0</size>
                         </box>
                     </geometry>
                     <material>
-                        <ambient>0.5 0.5 0.5 1</ambient>
-                        <diffuse>0.5 0.5 0.5 1</diffuse>
+                        <ambient>0.45 0.45 0.45 1</ambient>
+                        <diffuse>0.45 0.45 0.45 1</diffuse>
                     </material>
                 </visual>
             </link>
         </model>
 
-        <!-- Lewa sciana -->
+        <!-- Lewa sciana zewnetrzna -->
         <model name="wall_west">
             <static>true</static>
-            <pose>-12.5 0 1.0 0 0 0</pose>
+            <pose>-15 0 1.0 0 0 0</pose>
             <link name="link">
                 <collision name="collision">
                     <geometry>
                         <box>
-                            <size>0.15 18 2.0</size>
+                            <size>0.4 22.8 2.0</size>
                         </box>
                     </geometry>
                 </collision>
                 <visual name="visual">
                     <geometry>
                         <box>
-                            <size>0.15 18 2.0</size>
+                            <size>0.4 22.8 2.0</size>
                         </box>
                     </geometry>
                     <material>
-                        <ambient>0.5 0.5 0.5 1</ambient>
-                        <diffuse>0.5 0.5 0.5 1</diffuse>
+                        <ambient>0.45 0.45 0.45 1</ambient>
+                        <diffuse>0.45 0.45 0.45 1</diffuse>
                     </material>
                 </visual>
             </link>
         </model>
 
-        <!-- Wewnetrzna sciana 1 -->
+        <!-- ===================== -->
+        <!-- WEWNETRZNE SCIANY -->
+        <!-- Kazda sciana jest ciaglym elementem -->
+        <!-- Przejazdy wynikaja z odstepow miedzy scianami -->
+        <!-- Odstepy sa szerokie -->
+        <!-- ===================== -->
+
+        <!-- Sciana 1: lewa gorna pozioma -->
         <model name="inner_wall_1">
             <static>true</static>
-            <pose>-5 4 1.0 0 0 0</pose>
+            <pose>-6.15 6.0 1.0 0 0 0</pose>
             <link name="link">
                 <collision name="collision">
                     <geometry>
                         <box>
-                            <size>6.0 0.15 2.0</size>
+                            <size>10.0 0.35 2.0</size>
                         </box>
                     </geometry>
                 </collision>
                 <visual name="visual">
                     <geometry>
                         <box>
-                            <size>6.0 0.15 2.0</size>
+                            <size>10.0 0.35 2.0</size>
                         </box>
                     </geometry>
                     <material>
@@ -207,22 +214,22 @@
             </link>
         </model>
 
-        <!-- Wewnetrzna sciana 2 -->
+        <!-- Sciana 2: prawa gorna pionowa -->
         <model name="inner_wall_2">
             <static>true</static>
-            <pose>0 1 1.0 0 0 0</pose>
+            <pose>4.0 0.68 1.0 0 0 0</pose>
             <link name="link">
                 <collision name="collision">
                     <geometry>
                         <box>
-                            <size>0.15 6.0 2.0</size>
+                            <size>0.35 8.0 2.0</size>
                         </box>
                     </geometry>
                 </collision>
                 <visual name="visual">
                     <geometry>
                         <box>
-                            <size>0.15 6.0 2.0</size>
+                            <size>0.35 8.0 2.0</size>
                         </box>
                     </geometry>
                     <material>
@@ -233,22 +240,22 @@
             </link>
         </model>
 
-        <!-- Wewnetrzna sciana 3 -->
+        <!-- Sciana 3: centralna pozioma -->
         <model name="inner_wall_3">
             <static>true</static>
-            <pose>5 -3 1.0 0 0 0</pose>
+            <pose>0.0 -3.5 1.0 0 0 0</pose>
             <link name="link">
                 <collision name="collision">
                     <geometry>
                         <box>
-                            <size>6.0 0.15 2.0</size>
+                            <size>10.0 0.35 2.0</size>
                         </box>
                     </geometry>
                 </collision>
                 <visual name="visual">
                     <geometry>
                         <box>
-                            <size>6.0 0.15 2.0</size>
+                            <size>10.0 0.35 2.0</size>
                         </box>
                     </geometry>
                     <material>
@@ -259,22 +266,22 @@
             </link>
         </model>
 
-        <!-- Wewnetrzna sciana 4 -->
+        <!-- Sciana 4: lewa dolna pionowa -->
         <model name="inner_wall_4">
             <static>true</static>
-            <pose>-5 -4 1.0 0 0 0</pose>
+            <pose>-9.81 -2.89 1.0 0 0 0</pose>
             <link name="link">
                 <collision name="collision">
                     <geometry>
                         <box>
-                            <size>5.0 0.15 2.0</size>
+                            <size>0.35 7.0 2.0</size>
                         </box>
                     </geometry>
                 </collision>
                 <visual name="visual">
                     <geometry>
                         <box>
-                            <size>5.0 0.15 2.0</size>
+                            <size>0.35 7.0 2.0</size>
                         </box>
                     </geometry>
                     <material>
@@ -285,27 +292,27 @@
             </link>
         </model>
 
-        <!-- Pomaranczowa przeszkoda -->
-        <model name="box_obstacle">
+        <!-- Sciana 5: prawa dolna pionowa -->
+        <model name="inner_wall_5">
             <static>true</static>
-            <pose>7 4.5 1.0 0 0 0</pose>
+            <pose>9.0 -1.81 1.0 0 0 0</pose>
             <link name="link">
                 <collision name="collision">
                     <geometry>
                         <box>
-                            <size>1.2 1.2 2.0</size>
+                            <size>0.35 6.0 2.0</size>
                         </box>
                     </geometry>
                 </collision>
                 <visual name="visual">
                     <geometry>
                         <box>
-                            <size>1.2 1.2 2.0</size>
+                            <size>0.35 6.0 2.0</size>
                         </box>
                     </geometry>
                     <material>
-                        <ambient>1.0 0.45 0.0 1</ambient>
-                        <diffuse>1.0 0.45 0.0 1</diffuse>
+                        <ambient>0.6 0.6 0.6 1</ambient>
+                        <diffuse>0.6 0.6 0.6 1</diffuse>
                     </material>
                 </visual>
             </link>
@@ -315,7 +322,7 @@
         <!-- ROBOT JETBOT -->
         <!-- ===================== -->
         <model name='jetbot' canonical_link='chassis'>
-            <pose relative_to='world'>-8 -5 0 0 0 0</pose>
+            <pose relative_to='world'>11 -8 0 0 0 3.14159</pose>
 
             <!-- sensor frames -->
             <frame name="lidar_frame" attached_to='chassis'>
@@ -716,7 +723,7 @@
                 name="gz::sim::systems::DiffDrive">
                 <left_joint>left_wheel_joint</left_joint>
                 <right_joint>right_wheel_joint</right_joint>
-                <wheel_separation>1.2</wheel_separation>
+                <wheel_separation>2.34</wheel_separation>
                 <wheel_radius>0.4</wheel_radius>
                 <odom_publish_frequency>20</odom_publish_frequency>
                 <topic>cmd_vel</topic>
