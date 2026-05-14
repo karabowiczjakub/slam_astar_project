@@ -18,11 +18,15 @@ Currently working:
   - `jetbot/chassis -> jetbot/lidar/gpu_lidar`
 - Initial SLAM Toolbox setup
 - Map visualization in RViz
+- saved SLAM map loaded from file,
+- A* path planning on the saved map,
+- path visualization in RViz through `/astar_path`,
+- robot velocity control through `/cmd_vel`,
+- debug image generation for the planned path.
+
 
 Still in progress:
 
-- Improving SLAM map quality
-- Saving a clean map
 - Connecting the saved map to the A* planner
 - Driving the robot automatically to a clicked point in RViz
 
@@ -79,21 +83,38 @@ ros2 run tf2_ros static_transform_publisher \
 --frame-id jetbot/chassis \
 --child-frame-id jetbot/lidar/gpu_lidar
 
+Terminal 5 - Load the saved map :
+ros2 run nav2_map_server map_server \
+--ros-args \
+-p yaml_filename:=/home/$USER/slam_astar_project/maps/slam_map.yaml \
+-p use_sim_time:=true
 
-Terminal 5 - start SLAM toolbox :
 
-ros2 launch slam_toolbox online_sync_launch.py \
-slam_params_file:=/home/$USER/slam_astar_project/config/slam_params.yaml
+Terminal 6 - Activate the map server : 
+- ros2 lifecycle set /map_server configure
+- ros2 lifecycle set /map_server activate
+- ros2 lifecycle get /map_server
 
-Terminal 6 - start RVIZ :
+Terminal 7 - publish static map to odom TF
+ros2 run tf2_ros static_transform_publisher \
+--x 0.0 --y 0.0 --z 0.0 \
+--roll 0.0 --pitch 0.0 --yaw 0.0 \
+--frame-id map \
+--child-frame-id jetbot/odom
 
+
+Terminal 8 - start RVIZ :
 rviz2 -d ~/slam_astar_project/rviz/slam_astar.rviz --ros-args -p use_sim_time:=true
 
-Terminal 7 - use teleop to drive and make the SLAM map :
 
-ros2 run teleop_twist_keyboard teleop_twist_keyboard
+Terminal 9 - start the A* node :
+python3 ~/slam_astar_project/src/astar_drive.py
 
-Saving the map :
-mkdir -p ~/slam_astar_project/maps
-ros2 run nav2_map_server map_saver_cli -f ~/slam_astar_project/maps/slam_map
+
+And select a goal point in RVIZ. The A* will :
+- read the clicked point
+- compute a path on the saved map
+- publish the path to /astar_path
+- save results/astar_plan.png
+- send commands to /cmd_vel
 
