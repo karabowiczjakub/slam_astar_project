@@ -1,0 +1,62 @@
+amcl:
+  ros__parameters:
+    use_sim_time: true
+
+    # Ramki TF w naszym projekcie
+    global_frame_id: "map"
+    odom_frame_id: "jetbot/odom"
+    base_frame_id: "jetbot/chassis"
+
+    # AMCL ma publikować map -> odom
+    tf_broadcast: true
+    transform_tolerance: 1.0
+
+    # Topic lidara
+    scan_topic: "/lidar"
+
+    # Model ruchu dla robota różnicowego
+    robot_model_type: "nav2_amcl::DifferentialMotionModel"
+
+    # Parametry modelu odometrii
+    alpha1: 0.2
+    alpha2: 0.2
+    alpha3: 0.2
+    alpha4: 0.2
+    alpha5: 0.2
+
+    # Model lidara
+    laser_model_type: "likelihood_field"
+    laser_likelihood_max_dist: 2.0
+    laser_max_range: 12.0
+    laser_min_range: 0.15
+    max_beams: 120
+
+    # Parametry probabilistyczne lidara
+    z_hit: 0.8
+    z_short: 0.05
+    z_max: 0.05
+    z_rand: 0.1
+    sigma_hit: 0.2
+    lambda_short: 0.1
+
+    # Liczba cząstek
+    min_particles: 500
+    max_particles: 3000
+    pf_err: 0.05
+    pf_z: 0.99
+
+    # Jak często aktualizować pozycję
+    update_min_d: 0.05
+    update_min_a: 0.05
+    resample_interval: 1
+
+    # Odzyskiwanie po utracie pozycji
+    recovery_alpha_slow: 0.001
+    recovery_alpha_fast: 0.1
+
+    # Zapis ostatniej pozycji
+    save_pose_rate: 0.5
+
+    # Initial pose można podać z RViz przez 2D Pose Estimate
+    set_initial_pose: false
+    always_reset_initial_pose: false

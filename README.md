@@ -60,6 +60,7 @@ In every terminal :
 
 Terminal 1 :
  
+source /opt/ros/jazzy/setup.bash
 cd ~/slam_astar_project/sdf
 gz sim jetbot_world.sdf --render-engine ogre
 
@@ -78,7 +79,7 @@ python3 ~/slam_astar_project/src/odom_tf_pub.py
 Terminal 4 - publish static lidar TF :
 
 ros2 run tf2_ros static_transform_publisher \
---x 0.0 --y 0.0 --z 1.0 \
+--x 0.0 --y 0.0 --z 0.4 \
 --roll 0.0 --pitch 0.0 --yaw 0.0 \
 --frame-id jetbot/chassis \
 --child-frame-id jetbot/lidar/gpu_lidar
@@ -91,23 +92,29 @@ ros2 run nav2_map_server map_server \
 
 
 Terminal 6 - Activate the map server : 
-- ros2 lifecycle set /map_server configure
-- ros2 lifecycle set /map_server activate
-- ros2 lifecycle get /map_server
+ros2 lifecycle set /map_server configure
+ros2 lifecycle set /map_server activate
+ros2 lifecycle get /map_server
 
-Terminal 7 - publish static map to odom TF
-ros2 run tf2_ros static_transform_publisher \
---x 0.0 --y 0.0 --z 0.0 \
---roll 0.0 --pitch 0.0 --yaw 0.0 \
---frame-id map \
---child-frame-id jetbot/odom
+Terminal 7 - start AMCL
+ros2 run nav2_amcl amcl \
+--ros-args \
+--params-file /home/$USER/slam_astar_project/config/amcl_params.yaml \
+--remap scan:=/lidar
 
 
-Terminal 8 - start RVIZ :
+Terminal 8 - activate AMCL
+ros2 lifecycle set /amcl configure
+ros2 lifecycle set /amcl activate
+ros2 lifecycle get /amcl
+
+Terminal 9 - start RViz
 rviz2 -d ~/slam_astar_project/rviz/slam_astar.rviz --ros-args -p use_sim_time:=true
 
+Before running A*, initialize the robot pose in RViz: 2D Pose Estimate
+Click on the map where the robot is located and drag the arrow in the direction the robot is facing.
 
-Terminal 9 - start the A* node :
+Terminal 10 — start A*
 python3 ~/slam_astar_project/src/astar_drive.py
 
 
